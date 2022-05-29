@@ -3,7 +3,7 @@
 <p align='center'><img width="369" alt="Screen Shot 2022-05-27 at 14 22 09" src="https://user-images.githubusercontent.com/94130783/170708012-2651cd68-5378-4b61-ab9e-f95a1bd95ab4.png">
 </img> </p>
 
-# Table du conteunu:
+# Table du contenu:
 <ul>
   <li> <b> Introduction </b> </li> 
   <li> <b> Code séquentiel de la somme de Minkowski </b> </li>
@@ -13,11 +13,11 @@
   
   # Introduction:
  
-  Nous nous sommes des fois posés dans des situations où nous utilisions plusieurs lignes de codes avec plusieurs variables, boucles…,or le meilleur programme est celui qui est exécuté le plus vite possible et ayant le minimum de lignes possibles, donc les conditions ne seront pas réalisées. En effet, la solution idéale serait de paralléliser notre programme, cela veut-dire diviser le programme en plusieurs fragments qui, eux mêmes, s’exécutent en même temps. 
+  Nous nous sommes des fois posés dans des situations où nous utilisons plusieurs lignes de codes avec plusieurs variables, boucles,fonctions;or le meilleur programme est celui qui est exécuté le plus vite possible et ayant le minimum de lignes possibles. La solution idéale pour éxecuter un tel programme sera de le paralléliser,cela veut-dire le diviser en plusieurs fragments qui, eux mêmes, s’exécutent en même temps. 
  
-Tout cela se réalisera à partir de Application Programming Interface (API) Omp.h. L’interface permet effectivement de parraléliser un programme séquentiel écrit principalement en C ou C++, et ceci par plusieurs caréctéristique que l’environnement offre.
+Tout cela se réalisera à partir d'un Application Programming Interface (API) qui est OpenMp. L’interface permet effectivement de parraléliser un programme séquentiel écrit principalement en C ou C++, et ceci par plusieurs caréctéristique que l’environnement offre.
 
-  Dans notre projet, nous travaillerons sur le parallélisme d’un code pour la créations des formes à partir de La Somme de Minkowski. Pour définir ce principe, nous considérons A et B deux espaces euclidiens.La somme de Minkowski est une opération sur les parties d'un espace euclidien, dans ce cas A et B.
+  Dans notre projet, nous travaillerons sur le parallélisme d’un code basé sur le rendu de la somme de Minkowski. Pour définir ce principe, nous considérons A et B deux espaces euclidiens.La somme de Minkowski est une opération sur les parties d'un espace euclidien, dans ce cas A et B.
  
 <p align='center'> <img width="414" alt="Screen Shot 2022-05-27 at 14 38 15" src="https://user-images.githubusercontent.com/94130783/170710625-64316cc9-afda-4db1-bc10-cb2e952ad9ff.png"> </p>
 

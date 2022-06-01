@@ -13,7 +13,7 @@
   
   # Introduction:
  
-  Nous nous sommes des fois posés dans des situations où nous utilisons plusieurs lignes de codes avec plusieurs variables, boucles,fonctions;or le meilleur programme est celui qui est exécuté le plus vite possible et ayant le minimum de lignes possibles. La solution idéale pour éxecuter un tel programme sera de le paralléliser,cela veut-dire le diviser en plusieurs fragments qui, eux mêmes, s’exécutent en même temps. 
+  <p> Nous nous sommes des fois posés dans des situations où nous utilisons plusieurs lignes de codes avec plusieurs variables, boucles,fonctions;or le meilleur programme est celui qui est exécuté le plus vite possible et ayant le minimum de lignes possibles. La solution idéale pour éxecuter un tel programme sera de le paralléliser,cela veut-dire le diviser en plusieurs fragments qui, eux mêmes, s’exécutent en même temps. </p>
  
 Tout cela se réalisera à partir d'un Application Programming Interface (API) qui est OpenMp. L’interface permet effectivement de parraléliser un programme séquentiel écrit principalement en C ou C++, et ceci par plusieurs caréctéristique que l’environnement offre.
 

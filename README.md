@@ -74,3 +74,28 @@ Ensuite, nous créerons des oppérateurs pour simplifier le travail lors des fon
   </ul>
   
  Une autre étape principale sera de créer une fonction qui permettera de ordonner les angles du polygones, ce qui va nous faciliter la procédure de la somme de Minkowski.A ce fait le paramétrer tre sera un vecteur de type point.Pour y procéder,nous implémentons une variable <b>position</b> de type <b>size_t</b> pour calculer le résultat en bytes,celle-ci est initialisée par 0.Afin de détérminer la position de chaque point des polygones,nous implémentons une boucle pour un compteur i allant de 1 jusq'à la taille du poolygone, et faire une condition si l'ordre de  l'ordonné du polygone est inférieur à sa position,ou qu'elles sont égales et que l'ordre de l'abscice est inférieur à sa position,donc l'ordre sera égal à la position.En ce fait,nous ferons une rotation entre la première partie du vecteur,puis celle-ci et la position et la dérnière partie partie du polygone.
+ 
+  ```cpp
+  void reorder_polygon(vector<point> & P){
+    size_t pos = 0;
+    for(size_t i = 1; i < P.size(); i++){
+        if(P[i].y < P[pos].y || (P[i].y == P[pos].y && P[i].x < P[pos].x))
+            pos = i;
+    }
+    rotate(P.begin(), P.begin() + pos, P.end());
+}
+   ```
+
+Passons à la fonction principale pour réaliser la somme de Minkowski.Nous créons comme paramèttre deux vecteurs de type point puis les réordonner comme première étape en utilisant la foncntion précédente.En suite,nous remetterons en arrière chaqu'un du premier et du deuxième élément du vecteur.
+
+ ```cpp
+ vector<pt> minkowski(vector<point> P, vector<point> Q){
+    
+    reorder_polygon(P);
+    reorder_polygon(Q);
+ 
+    P.push_back(P[0]);
+    P.push_back(P[1]);
+    Q.push_back(Q[0]);
+    Q.push_back(Q[1]);
+  ```

@@ -99,3 +99,23 @@ Passons à la fonction principale pour réaliser la somme de Minkowski.Nous cré
     Q.push_back(Q[0]);
     Q.push_back(Q[1]);
   ```
+Dans la partie principale de la fonction, nous créons un vecteur de type point pour afficher le résultat de notre oppération,puis nous déclarons deux variables compteurs de type <b>size_t</b>.Nous insérront le début du vecteur résultat dans la somme de P et Q tant que les deux compteurs sont succéssivement inférieurs à la taiile de premier vecteur ou celui du deuxième.Pour savoir si on devra incrémenter le premier ou le deuxième compteur,nous créons une variable qui calcul la soustraction entre le premier vecteur à un certain indice et son successeur et le produit verctoriel (<b>cross</b>) du deuxième vecteur à un certain indice moin son successeur.Si celui-ci et supérieur à 0,nous incrémenttons le premier compteur,sinon nous incrémentons le deuxième.En dérnière étape nous retournons le vecteur résultat.
+
+```cpp
+ vector<pt> result;
+    size_t i = 0, j = 0;
+    while(i < P.size() - 2 || j < Q.size() - 2){
+        result.insert(result.begin(),P[i] + Q[j]);
+        
+        int cross = (P[i + 1] - P[i]).cross(Q[j + 1] - Q[j]);
+        if(cross >= 0)
+            ++i;
+        if(cross <= 0)
+            ++j;
+    }
+    
+
+    return result;
+}
+
+```

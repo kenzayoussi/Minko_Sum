@@ -190,7 +190,7 @@ Pour la fonction Minkowski,on specifie sur le <b> #pragma omp num_threads </b> l
  ```cpp
      vector<point> result;
     size_t i = 0, j = 0;
-    #pragma omp num_threads(4) default(none) shared(P,Q) private(i,j,cross)
+    #pragma omp num_threads(N) default(none) shared(P,Q) private(i,j,cross)
      while(i < P.size() - 2 || j < Q.size() - 2){
  ```
  

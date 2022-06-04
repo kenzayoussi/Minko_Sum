@@ -8,6 +8,7 @@
   <li> <b> Introduction </b> </li> 
   <li> <b> Code séquentiel de la somme de Minkowski </b> </li>
   <li> <b> Code parallélisé de la somme de Minkowski </b> </li>
+  <li> <b> Comparaison entre le code parallèle et séquentiel </b> </li>
   <li> <b> Conclusion </b> </li>
   </ul>
   
@@ -119,3 +120,92 @@ Dans la partie principale de la fonction, nous créons un vecteur de type point 
 }
 
 ```
+
+Dans la fonction <b>main()</b> de notre programe,nous essayerons d'effectuer trois fois la somme de Minkowski donc on declare six vecteurs puis nouos essayons d'afficher les coordonnées de 500 variables aléatoires à partir de cette somme. Le code final que nous obtenons est le suivant:
+
+```cpp
+int main()
+{
+    vector<pt> P;
+    vector<pt> Q;
+    vector<pt> R;
+    vector<pt> s;
+    vector<pt> t;
+    vector<pt> u;
+    vector<pt> result;
+ 
+    for (int i=0;i<500;i++){
+        pt p1 = pt((rand() % 100) + 1,(rand() % 100) + 1);
+        pt p2 = pt((rand() % 100) + 1,(rand() % 100) + 1);
+        P.insert(P.begin(),p1) ;
+        Q.insert(Q.begin(),p2);
+    }
+ 
+    for (int i=0;i<500;i++){
+        pt p1 = pt((rand() % 100) + 1,(rand() % 100) + 1);
+        pt p2 = pt((rand() % 100) + 1,(rand() % 100) + 1);
+        s.insert(s.begin(),p1);
+        t.insert(t.begin(),p2);
+    }
+ 
+
+R = minkowski(P,Q);
+u = minkowski(s,t);
+result=minkowski(R,u);
+
+
+for(int i=0;i<R.size();i++){
+  cout<<"x:"<<result[i].x<<" y:"<<result[i].y<<endl;
+}
+}
+```
+
+# Code Parralèle de la somme de Minkowski:
+  Notre objectif principale dans ce projet est de pouvoir paralléliser le code présenté danns les lignes preécédentes.La première des choses qu'on puisse faire est de s'attaquer au boucles <i>for</i> et les parraléliser en utilisant <b>#pragma omp for</b>.En effet,sur la fonction du réerdonnement du polygone nous ajouterons dans la commande précédente la directive <b>shared(pos)</b> pour laisser la variable partagée. En efet, nous executerons notre nouveau code ayant un problème de faut partage,donc notre solution sera de controler les <b>threads </b> se trouvant dans la section parralèlle dans la fonction <b> reorder_polygon </b>. Le code sera donc le suivant:
+  
+ ```cpp
+ void reorder_polygon(vector<point> & P){
+    size_t pos = 0;
+    int N = omp_get_thread_num();
+    omp_set_num_threads(N);
+    
+    double s_priv[N * 8];
+
+    #pragma omp parallel num_threads(N)
+    {
+        int t = omp_get_thread_num() ;
+        #pragma omp parallel for shared(pos)
+        for(size_t i = 1; i < P.size(); i++){
+            if(P[i].y < P[pos].y || (P[i].y == P[pos].y && P[i].x < P[pos].x))
+                s_priv[t * 8] = i;
+    }
+    rotate(P.begin(), P.begin() + pos, P.end());
+    }
+    for(size_t i = 0 ;i < N; i++){
+        pos=s_priv[i * 8];
+    }
+ ```
+Pour la fonction Minkowski,on specifie sur le <b> #pragma omp num_threads </b> le nombre de thread qu'on utilisera,puis le P et les Q en tant que variables partagés et les conteu puis l'oppérateur comme variables privés. Juste au dessus, nous considerons les lignes suivantes en tant que section critique en utilisant <b> #pragma omp critical. </b>
+
+ ```cpp
+     vector<point> result;
+    size_t i = 0, j = 0;
+    #pragma omp num_threads(4) default(none) shared(P,Q) private(i,j,cross)
+     while(i < P.size() - 2 || j < Q.size() - 2){
+ ```
+ 
+ 
+  ```cpp
+        #pragma omp critical
+        {
+            result.insert(result.begin(),P[i] + Q[j]);
+        
+            int cross = (P[i + 1] - P[i]).cross(Q[j + 1] - Q[j]);
+        if(cross >= 0)
+            ++i;
+        if(cross <= 0)
+            ++j;
+        }
+       
+      }
+   ```

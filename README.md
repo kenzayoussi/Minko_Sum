@@ -9,7 +9,6 @@
   <li> <b> Code séquentiel de la somme de Minkowski </b> </li>
   <li> <b> Code parallélisé de la somme de Minkowski </b> </li>
   <li> <b> Comparaison entre le code parallèle et séquentiel </b> </li>
-  <li> <b> Conclusion </b> </li>
   </ul>
   
   # Introduction:
@@ -209,3 +208,13 @@ Pour la fonction Minkowski,on specifie sur le <b> #pragma omp num_threads </b> l
        
       }
    ```
+# Comparaison entre le code parallèle et séquentiel
+
+### Pour 500 variables aléatoires:
+Temps d'execussion séquentiel:1.623
+<p align='center'> <img width="605" alt="Screen Shot 2022-06-04 at 03 09 59" src="https://user-images.githubusercontent.com/94130783/171973095-415e06f2-9f34-433b-91ac-37d990be1c40.png"> </p>
+
+### Pour 2000 variables aléatoires:
+Temps d'execussion séquentiel:7.542
+<p align='center'> <img width="605" alt="Screen Shot 2022-06-04 at 03 11 58" src="https://user-images.githubusercontent.com/94130783/171973823-c2205c12-cd7a-47c6-93c7-5b20e49f095c.png"> </p>
+

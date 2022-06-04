@@ -159,7 +159,7 @@ for(int i=0;i<R.size();i++){
 }
 ```
 
-# Code Parralèle de la somme de Minkowski:
+# Code Parallèle de la somme de Minkowski:
   Notre objectif principale dans ce projet est de pouvoir paralléliser le code présenté danns les lignes preécédentes.La première des choses qu'on puisse faire est de s'attaquer au boucles <i>for</i> et les parraléliser en utilisant <b>#pragma omp for</b>.En effet,sur la fonction du réerdonnement du polygone nous ajouterons dans la commande précédente la directive <b>shared(pos)</b> pour laisser la variable partagée. En efet, nous executerons notre nouveau code ayant un problème de faut partage,donc notre solution sera de controler les <b>threads </b> se trouvant dans la section parralèlle dans la fonction <b> reorder_polygon </b>. Le code sera donc le suivant:
   
  ```cpp
@@ -208,6 +208,28 @@ Pour la fonction Minkowski,on specifie sur le <b> #pragma omp num_threads </b> l
        
       }
    ```
+   
+Pour la fonction principale main,nous avons ajouter les <b> pragma omp for </b> afin de parelléliser les boucles.
+
+ ```cpp
+ #pragma omp for
+    for (int i=0;i<500;i++){
+        point p1 = point((rand() % 100) + 1,(rand() % 100) + 1);
+        point p2 = point((rand() % 100) + 1,(rand() % 100) + 1);
+        P.insert(P.begin(),p1) ;
+        Q.insert(Q.begin(),p2);
+ 
+  ```
+
+ ```cpp
+ #pragma omp for
+    for (int i=0;i<500;i++){
+        point p1 = point((rand() % 100) + 1,(rand() % 100) + 1);
+        point p2 = point((rand() % 100) + 1,(rand() % 100) + 1);
+        s.insert(s.begin(),p1);
+        t.insert(t.begin(),p2);
+    }
+  ```
 # Comparaison entre le code parallèle et séquentiel
 
 ### Pour 500 variables aléatoires:
